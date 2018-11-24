@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>595118051431-52d62la2bhvt8t9h28f3ruvlg3kd3kbr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.595118051431-52d62la2bhvt8t9h28f3ruvlg3kd3kbr</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBT0QM6yof4nFpgos9RdD_xydco2aCaFgI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>595118051431</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>JordanLines</string>
+	<key>PROJECT_ID</key>
+	<string>ammanlinen</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ammanlinen.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:595118051431:ios:5bbcae7d58409bf0</string>
+	<key>DATABASE_URL</key>
+	<string>https://ammanlinen.firebaseio.com</string>
+</dict>
+</plist>

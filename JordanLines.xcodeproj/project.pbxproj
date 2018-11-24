@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19FE0B068B7C23D54838EFA7 /* Pods_JordanLines.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90B941F9EF25EFDB89596AE0 /* Pods_JordanLines.framework */; };
+		331A41F7362BFE1FFD67E697 /* Pods_JordanLinesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FA84F5E64998A911F6645D /* Pods_JordanLinesTests.framework */; };
+		49B0E9407368B86D1C3739D0 /* Pods_JordanLinesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5763B16C254B16F54F8158 /* Pods_JordanLinesUITests.framework */; };
+		7CACDAD521A89E2D0059991D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CACDAD421A89E2D0059991D /* GoogleService-Info.plist */; };
+		7CACDAD721A8AEE50059991D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CACDAD621A8AEE50059991D /* Home.swift */; };
 		7CB228AF21A6B91900C0D925 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB228AE21A6B91900C0D925 /* AppDelegate.swift */; };
-		7CB228B121A6B91900C0D925 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB228B021A6B91900C0D925 /* ViewController.swift */; };
 		7CB228B421A6B91900C0D925 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB228B221A6B91900C0D925 /* Main.storyboard */; };
 		7CB228B621A6B91A00C0D925 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CB228B521A6B91A00C0D925 /* Assets.xcassets */; };
 		7CB228B921A6B91A00C0D925 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB228B721A6B91A00C0D925 /* LaunchScreen.storyboard */; };
@@ -34,9 +38,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4480201640F6ADBA2D9DE224 /* Pods-JordanLinesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JordanLinesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JordanLinesUITests/Pods-JordanLinesUITests.release.xcconfig"; sourceTree = "<group>"; };
+		57B9755408AF074487D8FAC8 /* Pods-JordanLinesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JordanLinesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JordanLinesTests/Pods-JordanLinesTests.release.xcconfig"; sourceTree = "<group>"; };
+		712D2DB278332574B84E3613 /* Pods-JordanLines.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JordanLines.release.xcconfig"; path = "Pods/Target Support Files/Pods-JordanLines/Pods-JordanLines.release.xcconfig"; sourceTree = "<group>"; };
+		7C13DBC89D66E8B881ECA2E5 /* Pods-JordanLines.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JordanLines.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JordanLines/Pods-JordanLines.debug.xcconfig"; sourceTree = "<group>"; };
+		7CACDAD421A89E2D0059991D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7CACDAD621A8AEE50059991D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		7CB228AB21A6B91900C0D925 /* JordanLines.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JordanLines.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CB228AE21A6B91900C0D925 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7CB228B021A6B91900C0D925 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7CB228B321A6B91900C0D925 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7CB228B521A6B91A00C0D925 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7CB228B821A6B91A00C0D925 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +56,11 @@
 		7CB228CA21A6B91A00C0D925 /* JordanLinesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JordanLinesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CB228CE21A6B91A00C0D925 /* JordanLinesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JordanLinesUITests.swift; sourceTree = "<group>"; };
 		7CB228D021A6B91A00C0D925 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88FA84F5E64998A911F6645D /* Pods_JordanLinesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JordanLinesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		90B941F9EF25EFDB89596AE0 /* Pods_JordanLines.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JordanLines.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D5763B16C254B16F54F8158 /* Pods_JordanLinesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JordanLinesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E28E54480AAF4A83F58546B9 /* Pods-JordanLinesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JordanLinesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JordanLinesUITests/Pods-JordanLinesUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		EDCAAF23F363D4BD1F5B346A /* Pods-JordanLinesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JordanLinesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JordanLinesTests/Pods-JordanLinesTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19FE0B068B7C23D54838EFA7 /* Pods_JordanLines.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				331A41F7362BFE1FFD67E697 /* Pods_JordanLinesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,12 +84,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49B0E9407368B86D1C3739D0 /* Pods_JordanLinesUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		449B1142E849F6A62804928E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				90B941F9EF25EFDB89596AE0 /* Pods_JordanLines.framework */,
+				88FA84F5E64998A911F6645D /* Pods_JordanLinesTests.framework */,
+				9D5763B16C254B16F54F8158 /* Pods_JordanLinesUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7CB228A221A6B91900C0D925 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +108,8 @@
 				7CB228C221A6B91A00C0D925 /* JordanLinesTests */,
 				7CB228CD21A6B91A00C0D925 /* JordanLinesUITests */,
 				7CB228AC21A6B91900C0D925 /* Products */,
+				C994D3AA2965999A7F4A7A04 /* Pods */,
+				449B1142E849F6A62804928E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,11 +127,12 @@
 			isa = PBXGroup;
 			children = (
 				7CB228AE21A6B91900C0D925 /* AppDelegate.swift */,
-				7CB228B021A6B91900C0D925 /* ViewController.swift */,
 				7CB228B221A6B91900C0D925 /* Main.storyboard */,
+				7CACDAD621A8AEE50059991D /* Home.swift */,
 				7CB228B521A6B91A00C0D925 /* Assets.xcassets */,
 				7CB228B721A6B91A00C0D925 /* LaunchScreen.storyboard */,
 				7CB228BA21A6B91A00C0D925 /* Info.plist */,
+				7CACDAD421A89E2D0059991D /* GoogleService-Info.plist */,
 			);
 			path = JordanLines;
 			sourceTree = "<group>";
@@ -125,6 +155,19 @@
 			path = JordanLinesUITests;
 			sourceTree = "<group>";
 		};
+		C994D3AA2965999A7F4A7A04 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7C13DBC89D66E8B881ECA2E5 /* Pods-JordanLines.debug.xcconfig */,
+				712D2DB278332574B84E3613 /* Pods-JordanLines.release.xcconfig */,
+				EDCAAF23F363D4BD1F5B346A /* Pods-JordanLinesTests.debug.xcconfig */,
+				57B9755408AF074487D8FAC8 /* Pods-JordanLinesTests.release.xcconfig */,
+				E28E54480AAF4A83F58546B9 /* Pods-JordanLinesUITests.debug.xcconfig */,
+				4480201640F6ADBA2D9DE224 /* Pods-JordanLinesUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +175,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CB228D321A6B91A00C0D925 /* Build configuration list for PBXNativeTarget "JordanLines" */;
 			buildPhases = (
+				D2F9226135C88352D32831FB /* [CP] Check Pods Manifest.lock */,
 				7CB228A721A6B91900C0D925 /* Sources */,
 				7CB228A821A6B91900C0D925 /* Frameworks */,
 				7CB228A921A6B91900C0D925 /* Resources */,
+				3C9E2E107E81400C65E360CC /* [CP] Embed Pods Frameworks */,
+				EDEAB63B00C81475418EEA31 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,6 +195,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CB228D621A6B91A00C0D925 /* Build configuration list for PBXNativeTarget "JordanLinesTests" */;
 			buildPhases = (
+				C50A88F8BC99D6942FE64C87 /* [CP] Check Pods Manifest.lock */,
 				7CB228BB21A6B91A00C0D925 /* Sources */,
 				7CB228BC21A6B91A00C0D925 /* Frameworks */,
 				7CB228BD21A6B91A00C0D925 /* Resources */,
@@ -167,6 +214,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CB228D921A6B91A00C0D925 /* Build configuration list for PBXNativeTarget "JordanLinesUITests" */;
 			buildPhases = (
+				5FE801CBDC0A2026DE636930 /* [CP] Check Pods Manifest.lock */,
 				7CB228C621A6B91A00C0D925 /* Sources */,
 				7CB228C721A6B91A00C0D925 /* Frameworks */,
 				7CB228C821A6B91A00C0D925 /* Resources */,
@@ -230,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CB228B921A6B91A00C0D925 /* LaunchScreen.storyboard in Resources */,
+				7CACDAD521A89E2D0059991D /* GoogleService-Info.plist in Resources */,
 				7CB228B621A6B91A00C0D925 /* Assets.xcassets in Resources */,
 				7CB228B421A6B91900C0D925 /* Main.storyboard in Resources */,
 			);
@@ -251,12 +300,145 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3C9E2E107E81400C65E360CC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-JordanLines/Pods-JordanLines-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JordanLines/Pods-JordanLines-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5FE801CBDC0A2026DE636930 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JordanLinesUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C50A88F8BC99D6942FE64C87 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JordanLinesTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2F9226135C88352D32831FB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JordanLines-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EDEAB63B00C81475418EEA31 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-JordanLines/Pods-JordanLines-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JordanLines/Pods-JordanLines-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7CB228A721A6B91900C0D925 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CB228B121A6B91900C0D925 /* ViewController.swift in Sources */,
+				7CACDAD721A8AEE50059991D /* Home.swift in Sources */,
 				7CB228AF21A6B91900C0D925 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,6 +612,7 @@
 		};
 		7CB228D421A6B91A00C0D925 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C13DBC89D66E8B881ECA2E5 /* Pods-JordanLines.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -449,6 +632,7 @@
 		};
 		7CB228D521A6B91A00C0D925 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 712D2DB278332574B84E3613 /* Pods-JordanLines.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -468,6 +652,7 @@
 		};
 		7CB228D721A6B91A00C0D925 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDCAAF23F363D4BD1F5B346A /* Pods-JordanLinesTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -489,6 +674,7 @@
 		};
 		7CB228D821A6B91A00C0D925 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57B9755408AF074487D8FAC8 /* Pods-JordanLinesTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -510,6 +696,7 @@
 		};
 		7CB228DA21A6B91A00C0D925 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E28E54480AAF4A83F58546B9 /* Pods-JordanLinesUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -530,6 +717,7 @@
 		};
 		7CB228DB21A6B91A00C0D925 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4480201640F6ADBA2D9DE224 /* Pods-JordanLinesUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

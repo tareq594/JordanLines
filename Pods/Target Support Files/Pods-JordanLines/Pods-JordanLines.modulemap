@@ -1,0 +1,6 @@
+framework module Pods_JordanLines {
+  umbrella header "Pods-JordanLines-umbrella.h"
+
+  export *
+  module * { export * }
+}

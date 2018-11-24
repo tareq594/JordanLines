@@ -41,5 +41,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Jordan Lines needs to know your current location</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Jordan Lines needs to know your current location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Jordan Lines needs to know your current location</string>
 </dict>
 </plist>
