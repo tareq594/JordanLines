@@ -47,5 +47,10 @@
 	<string>Jordan Lines needs to know your current location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Jordan Lines needs to know your current location</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

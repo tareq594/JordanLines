@@ -9,6 +9,8 @@ import UIKit
 import CoreLocation
 import GoogleMaps
 import GooglePlaces
+import Alamofire
+import SwiftyJSON
 
 class Home: UIViewController {
     
@@ -17,11 +19,37 @@ class Home: UIViewController {
 
     // connects the mapview from the storyboard.
     @IBOutlet weak var Gmap: GMSMapView!
-    
+    @IBOutlet weak var menu: UIBarButtonItem!
     // app view lifecycle => viewdidload.
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        // We set the Navigation bar to be Transparent, that gives the design more elegent taste.
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
+        
+        // The Side Menu settings.
+        // to let the menue take effect.
+        menu.target = self.revealViewController()
+        menu.action = #selector(SWRevealViewController.revealToggle(_:))
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
+        //self.revealViewController()?.rearViewRevealWidth = 160
+        
+        // Take notifications from the side menue when it appears and disappears, so we can enable and disable
+        // the map interaction accordingly. this is important to make the side menu gestures work.
+        NotificationCenter.default.addObserver(self, selector: #selector(self.SideMenuAppear), name:NSNotification.Name(rawValue: "SideMenuAppear"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.SideMenuDisappear), name:NSNotification.Name(rawValue: "SideMenuDisappear"), object: nil)
+
+        // set the map style from JSON file located in Styles folder.
+        setMapStyle(mapview: Gmap,style: "LightMapStyle")
+        
+        // sends HTTP request and receive the routes(Temp).
+        getroutes()
     }
     
     // app view lifecycle => viewwillappear.
@@ -31,6 +59,18 @@ class Home: UIViewController {
         determineMyCurrentLocation()
     }
     
+   // see above when the function is called
+   @objc func SideMenuAppear() {
+    Gmap.isUserInteractionEnabled = false
+    }
+    
+    // see above when the function is called
+    @objc func SideMenuDisappear() {
+    Gmap.isUserInteractionEnabled = true
+    }
+
+    
+     // see above when the function is called
     func determineMyCurrentLocation() {
         // initialise Clllocation manager with it's delegate extension.
         locationManager = CLLocationManager()
@@ -39,6 +79,43 @@ class Home: UIViewController {
     }
     
 }
+
+
+ // see above when the function is called
+    func getroutes() {
+        // here we set the https parameters object
+        let parameters = [
+            "routerId": "routerIddefault",
+            "maxWalkDistance": "2000",
+            "mode":"WALK,TRANSIT",
+            "cutoffSec":"3600",
+            "fromPlace":"31.9637032,35.8746904",
+            "toPlace":"32.0232583,35.8483421"]
+        
+        // here we do the request and handle the response with Swifty Json library.
+        Alamofire.request("http://otp.khutoutna.gov.jo:8080/otp/routers/default/plan", parameters: parameters).responseJSON { response in
+            if let json = response.result.value {
+               // print("JSON: \(JSON(json)["plan"])") // serialized json response
+            let itineraries = JSON(json)["plan"]["itineraries"].arrayValue
+                print(itineraries.count)
+            }
+        }
+
+}
+
+func setMapStyle(mapview:GMSMapView!,style:String){
+    do {
+        // Set the map style by passing the URL of the local file.
+        if let styleURL = Bundle.main.url(forResource: style, withExtension: "json") {
+            mapview.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+        } else {
+            print("Unable to find style.json")
+        }
+    } catch {
+        print("One or more of the map styles failed to load. \(error)")
+    }
+}
+
 
 // Location manager delegate extension starts to listen after determineMyCurrentLocation().
 extension Home:CLLocationManagerDelegate {
@@ -53,7 +130,7 @@ extension Home:CLLocationManagerDelegate {
         
         // this is needed to load the map camera once the location is provided.
         if !ismaploaded {
-            let camera = GMSCameraPosition.camera(withLatitude: (userLocation.coordinate.latitude), longitude: (userLocation.coordinate.longitude), zoom: 10.0)
+            let camera = GMSCameraPosition.camera(withLatitude: (userLocation.coordinate.latitude), longitude: (userLocation.coordinate.longitude), zoom: 14.0)
             Gmap.camera = camera }
     }
     

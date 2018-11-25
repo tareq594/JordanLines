@@ -12,6 +12,9 @@ pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
 pod 'GoogleMaps'
 pod 'GooglePlaces'
+pod 'Alamofire'
+pod 'SwiftyJSON'
+pod 'IQKeyboardManagerSwift'
 
 
 

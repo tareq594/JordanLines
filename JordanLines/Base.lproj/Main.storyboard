@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TNS-va-iWz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -25,27 +25,104 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="b10-B1-RJP"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lM-zj-YVT">
+                                <rect key="frame" x="0.0" y="0.0" width="15" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="KWV-yQ-aWR"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="HVv-mU-ImD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="13S-Xk-SLO"/>
                             <constraint firstItem="HVv-mU-ImD" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="A5R-PD-9Yh"/>
+                            <constraint firstItem="8lM-zj-YVT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ALY-b1-dA9"/>
                             <constraint firstItem="HVv-mU-ImD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="H5S-9x-zhc"/>
+                            <constraint firstItem="8lM-zj-YVT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="I7P-U1-tJ6"/>
                             <constraint firstItem="HVv-mU-ImD" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ZL2-P7-JKM"/>
                             <constraint firstItem="HVv-mU-ImD" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bhi-3l-d4Z"/>
                             <constraint firstItem="HVv-mU-ImD" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="eIs-qc-SM3"/>
+                            <constraint firstItem="8lM-zj-YVT" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="iWo-ng-ijX"/>
                             <constraint firstItem="HVv-mU-ImD" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ksr-0f-kPj"/>
                             <constraint firstItem="HVv-mU-ImD" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="xZh-1W-fEF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Jordan Lines" id="2TA-Vo-eg6">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="menu" id="tPJ-EE-Mj5">
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="Gmap" destination="HVv-mU-ImD" id="ezL-ud-MlF"/>
+                        <outlet property="menu" destination="tPJ-EE-Mj5" id="LSR-I8-3Xk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1076" y="132.68365817091455"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="rw0-eW-V9P">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gHD-XA-FuO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="e7D-9f-f1q">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="QJc-2a-t0p"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qgn-FR-DAv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
         </scene>
+        <!--Reveal View Controller-->
+        <scene sceneID="Kzd-yA-pTY">
+            <objects>
+                <viewController id="TNS-va-iWz" customClass="SWRevealViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KF8-mK-mPd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="mfX-ep-B5F"/>
+                    </view>
+                    <connections>
+                        <segue destination="gHD-XA-FuO" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="nqh-Nf-44J"/>
+                        <segue destination="h4E-em-xrb" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="Hia-jN-wKl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0tI-di-74u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1801" y="-245"/>
+        </scene>
+        <!--Side Menue-->
+        <scene sceneID="Qh4-Xh-ZTh">
+            <objects>
+                <viewController id="h4E-em-xrb" customClass="SideMenue" customModule="JordanLines" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fof-Yk-vGG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="oiA-WS-AwC"/>
+                    </view>
+                    <connections>
+                        <segue destination="gHD-XA-FuO" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="qh6-oX-drv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oPu-Qf-U2U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-693" y="-607"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="menu" width="24" height="17"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="qh6-oX-drv"/>
+    </inferredMetricsTieBreakers>
 </document>
