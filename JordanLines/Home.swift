@@ -16,10 +16,40 @@ class Home: UIViewController {
     
     var locationManager:CLLocationManager!
     var ismaploaded = false
+    var test = true
 
     // connects the mapview from the storyboard.
     @IBOutlet weak var Gmap: GMSMapView!
     @IBOutlet weak var menu: UIBarButtonItem!
+    
+    
+    // design elements
+    // fromView elements
+    @IBOutlet weak var fromDropMenu: UIView!
+    @IBOutlet weak var FromChildView: UIView!
+    @IBOutlet weak var fromsearchview: UIView!
+    @IBOutlet weak var fromcurrentlocationView: UIView!
+    @IBOutlet weak var fromPinFromMapView: UIView!
+    @IBOutlet weak var fromparentviewheight: NSLayoutConstraint!
+    
+    // ToView elements
+    @IBOutlet weak var ToChildView: UIView!
+    @IBOutlet weak var ToSearchView: UIView!
+    @IBOutlet weak var ToCurrentView: UIView!
+    @IBOutlet weak var ToPinFromMapView: UIView!
+    @IBOutlet weak var ToDropMenuView: UIView!
+    @IBOutlet weak var ToParentViewHeight: NSLayoutConstraint!
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
     // app view lifecycle => viewdidload.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +60,23 @@ class Home: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
+        
+        // set cornerradius.
+        FromChildView.layer.cornerRadius = 6.0
+        fromPinFromMapView.layer.cornerRadius = 6.0
+        fromsearchview.layer.cornerRadius = 6.0
+        fromcurrentlocationView.layer.cornerRadius = 6.0
+        ToChildView.layer.cornerRadius = 6.0
+        ToSearchView.layer.cornerRadius = 6.0
+        ToCurrentView.layer.cornerRadius = 6.0
+        ToPinFromMapView.layer.cornerRadius = 6.0
+        
+        // by default the dropdown menues are hidden.
+        hideFromDropMenu()
+        hideToDropMenu()
+        
+
+
         
         // The Side Menu settings.
         // to let the menue take effect.
@@ -57,6 +104,27 @@ class Home: UIViewController {
         super.viewWillAppear(animated)
         // initialise Clllocation manager with it's delegate extension.
         determineMyCurrentLocation()
+    }
+    
+    func hideFromDropMenu() {
+        // 1- hide dropmenue view and disable it
+        fromDropMenu.isHidden = true
+        // 2- set the hight of the from parent view to 49
+        fromparentviewheight.constant = 49
+    }
+    
+    func hideToDropMenu() {
+        // 1- hide dropmenue view and disable it
+        ToDropMenuView.isHidden = true
+        // 2- set the hight of the from parent view to 49
+        ToParentViewHeight.constant = 49
+    }
+    
+    func showFromDropMenu() {
+        // 1- hide dropmenue view and disable it
+        fromDropMenu.isHidden = false
+        // 2- set the hight of the from parent view to 49
+        fromparentviewheight.constant = 134
     }
     
    // see above when the function is called
@@ -102,6 +170,8 @@ class Home: UIViewController {
         }
 
 }
+
+
 
 func setMapStyle(mapview:GMSMapView!,style:String){
     do {

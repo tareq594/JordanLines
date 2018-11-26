@@ -111,6 +111,7 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - Protobuf (3.6.1)
+  - SwiftLint (0.27.0)
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
@@ -121,6 +122,7 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - IQKeyboardManagerSwift
+  - SwiftLint
   - SwiftyJSON
 
 SPEC REPOS:
@@ -147,6 +149,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+    - SwiftLint
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -172,8 +175,9 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+  SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 0177201cf65aaf8e242c35d46846b8f45dbc4ef8
+PODFILE CHECKSUM: 1686998feba8bcba39e5615be7365a7cac63c3d3
 
 COCOAPODS: 1.5.3

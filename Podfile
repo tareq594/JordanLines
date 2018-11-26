@@ -15,6 +15,8 @@ pod 'GooglePlaces'
 pod 'Alamofire'
 pod 'SwiftyJSON'
 pod 'IQKeyboardManagerSwift'
+pod 'SwiftLint'
+
 
 
 
