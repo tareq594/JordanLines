@@ -25,6 +25,30 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="b10-B1-RJP"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aqE-pp-KKu">
+                                <rect key="frame" x="16" y="394" width="343" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7j-Bc-eth">
+                                        <rect key="frame" x="8" y="0.0" width="327" height="40"/>
+                                        <color key="backgroundColor" red="0.0" green="0.60292899030000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Search Routes">
+                                            <color key="titleColor" red="0.93712550400000005" green="0.93349975350000003" blue="0.92548960449999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="SearchRouteButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Emq-8x-fIX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="X7j-Bc-eth" firstAttribute="top" secondItem="aqE-pp-KKu" secondAttribute="top" id="0IZ-zz-awQ"/>
+                                    <constraint firstAttribute="height" constant="40" id="0KZ-Da-Ego"/>
+                                    <constraint firstItem="X7j-Bc-eth" firstAttribute="leading" secondItem="aqE-pp-KKu" secondAttribute="leading" constant="8" id="2qx-08-XRy"/>
+                                    <constraint firstAttribute="trailing" secondItem="X7j-Bc-eth" secondAttribute="trailing" constant="8" id="exg-Nj-cUg"/>
+                                    <constraint firstAttribute="bottom" secondItem="X7j-Bc-eth" secondAttribute="bottom" id="uWi-Ei-axJ"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7mN-yG-dze">
                                 <rect key="frame" x="16" y="80" width="343" height="152"/>
                                 <subviews>
@@ -428,9 +452,12 @@
                             <constraint firstItem="HVv-mU-ImD" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bhi-3l-d4Z"/>
                             <constraint firstItem="HVv-mU-ImD" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="eIs-qc-SM3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SfN-en-YiL" secondAttribute="trailing" constant="16" id="eMe-j0-X6x"/>
+                            <constraint firstItem="aqE-pp-KKu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="fZX-x3-Nnj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7mN-yG-dze" secondAttribute="trailing" constant="16" id="fjp-KT-Vpj"/>
                             <constraint firstItem="8lM-zj-YVT" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="iWo-ng-ijX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aqE-pp-KKu" secondAttribute="trailing" constant="16" id="kcV-Jd-iYq"/>
                             <constraint firstItem="HVv-mU-ImD" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ksr-0f-kPj"/>
+                            <constraint firstItem="aqE-pp-KKu" firstAttribute="top" secondItem="SfN-en-YiL" secondAttribute="bottom" constant="8" id="mEu-Mn-JxQ"/>
                             <constraint firstItem="HVv-mU-ImD" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="xZh-1W-fEF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -444,6 +471,7 @@
                         <outlet property="FromChildView" destination="RF0-15-tFj" id="TdB-25-fUg"/>
                         <outlet property="FromXbutoonOutlet" destination="MbC-cn-aDs" id="1wO-7Y-KuT"/>
                         <outlet property="Gmap" destination="HVv-mU-ImD" id="ezL-ud-MlF"/>
+                        <outlet property="SearchButtonOutlet" destination="X7j-Bc-eth" id="MZh-Tg-Lyq"/>
                         <outlet property="ToChildView" destination="mcE-B8-QJC" id="GIo-hz-rup"/>
                         <outlet property="ToCurrentView" destination="3Ml-j1-12M" id="USs-zZ-oQb"/>
                         <outlet property="ToDropMenuView" destination="wVP-3p-pR8" id="uQd-pm-4oH"/>
@@ -459,6 +487,7 @@
                         <outlet property="fromplaceTextField" destination="kC9-fM-IGM" id="G5b-1G-J0G"/>
                         <outlet property="fromsearchview" destination="OlT-Uk-Pba" id="Ep3-Wi-Rgx"/>
                         <outlet property="menu" destination="tPJ-EE-Mj5" id="LSR-I8-3Xk"/>
+                        <outlet property="searchRouteView" destination="aqE-pp-KKu" id="73o-PF-C2p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

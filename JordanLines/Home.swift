@@ -88,6 +88,7 @@ class Home: UIViewController {
         fromplaceTextField.resignFirstResponder()
         isfromexist = false
         FromXbutoonOutlet.isHidden = true
+        searchRouteView.isHidden = true
     }
     
     
@@ -136,6 +137,16 @@ class Home: UIViewController {
         istoexist = false
         ToTextField.resignFirstResponder()
         ToXbuttonOutlet.isHidden = true
+        searchRouteView.isHidden = true
+    }
+    
+    // search route button elsements
+    
+    @IBOutlet weak var searchRouteView: UIView!
+   
+    
+    @IBOutlet weak var SearchButtonOutlet: UIButton!
+    @IBAction func SearchRouteButton(_ sender: Any) {
     }
     
     
@@ -160,10 +171,13 @@ class Home: UIViewController {
         ToSearchView.layer.cornerRadius = 6.0
         ToCurrentView.layer.cornerRadius = 6.0
         ToPinFromMapView.layer.cornerRadius = 6.0
+        SearchButtonOutlet.layer.cornerRadius = 2.0
         
         // by default the dropdown menues are hidden.
         hideFromDropMenu()
         hideToDropMenu()
+        searchRouteView.isHidden = true
+
         
         fromplaceTextField.inputView = UIView()
         ToTextField.inputView = UIView()
@@ -309,7 +323,7 @@ class Home: UIViewController {
             if let json = response.result.value {
                // print("JSON: \(JSON(json)["plan"])") // serialized json response
             let itineraries = JSON(json)["plan"]["itineraries"].arrayValue
-                print(itineraries.count)
+               // print(itineraries.count)
             }
         }
 
@@ -395,7 +409,7 @@ extension Home:CLLocationManagerDelegate {
                 //  print(address)
                 let lines = address.lines! as [String]
                  currentAddress = lines.joined(separator: " ")
-                print(currentAddress)
+                //print(currentAddress)
                 textfield.text = currentAddress
     }
         }
@@ -444,6 +458,9 @@ extension Home:UITextFieldDelegate {
             isfromplaceactive = false
             let Cposition = Gmap.camera.target
             fromlocationCoordinates = Cposition
+            if istoexist {
+                searchRouteView.isHidden = false
+            }
             isfromexist = true
             Gmap.camera = GMSCameraPosition.camera(withLatitude: Cposition.latitude - 0.0004, longitude: Cposition.longitude + 0.000422, zoom: 16.0)
 
@@ -453,6 +470,9 @@ extension Home:UITextFieldDelegate {
             istoplaceactive = false
             let Cposition = Gmap.camera.target
             tolocationCoordinates = Cposition
+            if isfromexist {
+                searchRouteView.isHidden = false
+            }
             istoexist = true
             Gmap.camera = GMSCameraPosition.camera(withLatitude: Cposition.latitude - 0.0004, longitude: Cposition.longitude + 0.000422, zoom: 16.0)
         }
@@ -487,13 +507,15 @@ extension Home:UITextFieldDelegate {
 extension Home:GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         // hoon m3naha 25tar place o rj3lna place // place.coordinate // place.name // place.formattedAddress
-        print(place.coordinate)
+       // print(place.coordinate)
         Gmap.camera = GMSCameraPosition.camera(withTarget: place.coordinate, zoom: 16.0)
         dismiss(animated: true, completion: nil)
         if searchedfield == "from"{
+            isfromexist = false
             fromplaceTextField.becomeFirstResponder()
         }
         if searchedfield == "to"{
+            istoexist = false
             ToTextField.becomeFirstResponder()
         }
         
