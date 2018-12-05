@@ -1,22 +1,26 @@
 //
-//  Home.swift
+//  LineSetUp.swift
 //  JordanLines
 //
-//  Created by Tareq Sanabra on 11/23/18.
+//  Created by Tareq Sanabra on 11/28/18.
 //  Copyright © 2018 Tareq Sanabra. All rights reserved.
+//
 
 import UIKit
+import Alamofire
 import CoreLocation
+import SwiftyJSON
 import GoogleMaps
 import GooglePlaces
-import Alamofire
-import SwiftyJSON
+import Firebase
 
-class Home: UIViewController {
+
+
+
+class LineSetUp: UIViewController {
     
     var locationManager:CLLocationManager!
     var ismaploaded = false
-    var test = true
     var searchedfield = "from"
     let frommarker = GMSMarker()
     let tomarker = GMSMarker()
@@ -26,11 +30,23 @@ class Home: UIViewController {
     var tolocationCoordinates = CLLocationCoordinate2D()
     var isfromexist = false
     var istoexist = false
-
-    // connects the mapview from the storyboard.
-    @IBOutlet weak var Gmap: GMSMapView!
-    @IBOutlet weak var menu: UIBarButtonItem!
+    var polyarrs = [JSON]()
+    var issearched = false
+    var db: Firestore!
+    var stopdic = [String:String]()
     
+    class stop {
+        var name = String()
+        var lat = CLLocationDegrees()
+        var long = CLLocationDegrees()
+            }
+    var stops = Array<stop>()
+    
+    
+    
+
+
+    @IBOutlet weak var Gmap: GMSMapView!
     
     // design elements
     // fromView elements
@@ -47,6 +63,7 @@ class Home: UIViewController {
     @IBAction func fromSearchtextButton(_ sender: Any) {
         searchedfield = "from"
         getplace()
+        
     }
     
     @IBAction func fromSearchIconButton(_ sender: Any) {
@@ -140,32 +157,257 @@ class Home: UIViewController {
         searchRouteView.isHidden = true
     }
     
+    
+    // line info elements
+    
+    @IBOutlet weak var linename: UITextField!
+    @IBOutlet weak var bustype: UITextField!
+    @IBOutlet weak var routeDescription: UITextField!
+    
+    
+    
     // search route button elsements
     
     @IBOutlet weak var searchRouteView: UIView!
-   
+    
     
     @IBOutlet weak var SearchButtonOutlet: UIButton!
     @IBAction func SearchRouteButton(_ sender: Any) {
-        results.getroutes(from: fromlocationCoordinates,to: tolocationCoordinates)
+        
+        if issearched{
+            SearchButtonOutlet.setTitle("Search Route", for: .normal)
+            issearched = false
+            var koko = ["stop2": "33.66,35.00" , "stop1":"33.66,34.99"]
+            
+            db.collection("Lines").document(linename.text!).setData([
+                "bus type": bustype.text,
+                "from": String(fromlocationCoordinates.latitude) + "," + String(fromlocationCoordinates.longitude) ,
+                "to": String(tolocationCoordinates.latitude) + "," + String(tolocationCoordinates.longitude),
+                "route description": routeDescription.text
+            ]) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                }
+            }
+
+            var alpha = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+            var c1 = 0
+            var c2 = 1
+            for stop in stops {
+                var pref = alpha[c1] + String(c2)
+                print(stop.lat)
+                db.collection("Stopspool").document(stop.name).setData([
+                    "name": stop.name,
+                    "lat": stop.lat,
+                    "lon": stop.long
+                ]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("Document successfully written!")
+                    }
+                }
+                
+                db.collection("Lines").document(linename.text!).collection("Stops").document(pref + stop.name).setData([
+                    "ref": "/Stopspool/"+stop.name,
+                ]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("Document successfully written!")
+                    }
+                }
+
+                
+                
+                
+                if c2 < 9 {
+                    c2 = c2 + 1
+                } else {
+                    c1 = c1 + 1
+                    c2 = 1
+                }
+            }
+            
+            
+        } else {
+            issearched = true
+            SearchButtonOutlet.setTitle("Confirm", for: .normal)
+        Gmap.camera = GMSCameraPosition.camera(withLatitude:fromlocationCoordinates.latitude , longitude:fromlocationCoordinates.longitude , zoom: 16)
+        
+        let parameters = [
+            "from": String(fromlocationCoordinates.latitude) + ", " + String(fromlocationCoordinates.longitude),
+            "to": String(tolocationCoordinates.latitude) + ", " + String(tolocationCoordinates.longitude)
+        ]
+        
+        Alamofire.request("http://localhost:3000/api/plotstops",parameters:parameters).responseString { response in
+            let polyline = response.value!
+           // print(polyline)
+            let polylineparameters = [
+                "polyline": polyline,]
+            Alamofire.request("http://api.khutoutna.gov.jo/decode", parameters: polylineparameters).responseJSON { response in
+                if let json = response.result.value {
+                    let polyarr = JSON(json).arrayValue
+                    self.handlepolyarr(polyarr: polyarr)
+                    
+                }
+            }
+            
+        }
+        }
+    }
+
+    
+    
+    var timer = Timer()
+    var counter = 5
+
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 2.0, target: self,   selector: (#selector(LineSetUp.updateTimer)), userInfo: nil, repeats: true)
     }
     
-    // results View
+    @objc func updateTimer(){
+        if counter == 0 {
+            timer.invalidate()
+        } else {
     
-    @IBOutlet weak var resultsView: UIView!
+        var bounds = GMSCoordinateBounds()
+                        let lat = polyarrs[polyarrs.count-counter]["lat"].doubleValue
+                        let lon = polyarrs[polyarrs.count-counter]["lon"].doubleValue
+                        let pointmarker = GMSMarker()
+                        pointmarker.map = self.Gmap
+                        pointmarker.position.latitude = lat
+                        pointmarker.position.longitude = lon
+                        bounds = bounds.includingCoordinate(pointmarker.position)
+            
+            if counter == 1 {
+                let polyparameters = [
+                    "routerId": "routerIddefault",
+                    "maxWalkDistance": "2000",
+                    "mode":"WALK,TRANSIT",
+                    "cutoffSec":"3600",
+                    "fromPlace": (String(lat) + "," + String(lon)),
+                    "toPlace":String(tolocationCoordinates.latitude) + ", " + String(tolocationCoordinates.longitude)]
+                Alamofire.request("http://otp.khutoutna.gov.jo:8080/otp/routers/default/plan", parameters: polyparameters).responseJSON { response in
+                    
+                    if let json = response.result.value {
+                        var stopcreatedname = JSON(json)["plan"]["itineraries"][0]["legs"][0]["from"]["name"].stringValue
+                        if stopcreatedname == "Origin"{
+                            stopcreatedname = JSON(json)["plan"]["itineraries"][0]["legs"][1]["from"]["name"].stringValue
+                        }
+                        
+                        print(stopcreatedname)
+                        var mystop = stop()
+                        mystop.name = stopcreatedname
+                        mystop.lat = lat
+                        mystop.long = lon
+                        self.stops.append(mystop)
+                    }
+                }
+                
+            } else {
+                        let polyparameters = [
+                            "routerId": "routerIddefault",
+                            "maxWalkDistance": "2000",
+                            "mode":"WALK,TRANSIT",
+                            "cutoffSec":"3600",
+                            "fromPlace": (String(lat) + "," + String(lon)),
+                            "toPlace": String(fromlocationCoordinates.latitude) + "," + String(fromlocationCoordinates.longitude)]
+                        Alamofire.request("http://otp.khutoutna.gov.jo:8080/otp/routers/default/plan", parameters: polyparameters).responseJSON { response in
+            
+                            if let json = response.result.value {
+                                var stopcreatedname = JSON(json)["plan"]["itineraries"][0]["legs"][0]["from"]["name"].stringValue
+                                if stopcreatedname == "Origin"{
+                                    stopcreatedname = JSON(json)["plan"]["itineraries"][0]["legs"][1]["from"]["name"].stringValue
+                                }
+                                print(stopcreatedname)
+                                var mystop = stop()
+                                mystop.name = stopcreatedname
+                                mystop.lat = lat
+                                mystop.long = lon
+                                self.stops.append(mystop)
+
+                            }
+                        }
+            }
+            
+            
+            
+            
+                    let update = GMSCameraUpdate.fit(bounds, withPadding: 60)
+                    Gmap.animate(with: update)
+                    }
+            counter = counter - 1
+        }
+
+
     
-    @IBOutlet weak var resultsHeight: NSLayoutConstraint!
     
-    // app view lifecycle => viewdidload.
+    func handlepolyarr(polyarr : [JSON]){
+     polyarrs = polyarr
+     counter = polyarr.count
+        stops = Array<stop>()
+        runTimer()
+        
+        
+//        var bounds = GMSCoordinateBounds()
+//
+//        for poly in polyarr {
+//            let lat = poly["lat"].doubleValue
+//            let lon = poly["lon"].doubleValue
+//            let pointmarker = GMSMarker()
+//            pointmarker.map = self.Gmap
+//            pointmarker.position.latitude = lat
+//            pointmarker.position.longitude = lon
+//            bounds = bounds.includingCoordinate(pointmarker.position)
+//
+//            let polyparameters = [
+//                "routerId": "routerIddefault",
+//                "maxWalkDistance": "2000",
+//                "mode":"WALK,TRANSIT",
+//                "cutoffSec":"3600",
+//                "fromPlace": (String(lat) + "," + String(lon)),
+//                "toPlace":"31.994880000000002,35.919410000000006"]
+//            Alamofire.request("http://otp.khutoutna.gov.jo:8080/otp/routers/default/plan", parameters: polyparameters).responseJSON { response in
+//
+//                if let json = response.result.value {
+//                    var stopcreatedname = JSON(json)["plan"]["itineraries"][0]["legs"][0]["from"]["name"].stringValue
+//                    if stopcreatedname == "Origin"{
+//                        stopcreatedname = JSON(json)["plan"]["itineraries"][0]["legs"][1]["from"]["name"].stringValue
+//                    }
+//                    print(stopcreatedname)
+//                }
+//            }
+//
+//
+//
+//
+//        let update = GMSCameraUpdate.fit(bounds, withPadding: 60)
+//        Gmap.animate(with: update)
+//        }
+    }
+    
+    
+    
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // [START setup]
+        let settings = FirestoreSettings()
+        
+        Firestore.firestore().settings = settings
+        // [END setup]
+        db = Firestore.firestore()
+
+
         // Do any additional setup after loading the view.
         
-        // We set the Navigation bar to be Transparent, that gives the design more elegent taste.
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = .clear
         
         // set cornerradius.
         FromChildView.layer.cornerRadius = 6.0
@@ -182,7 +424,7 @@ class Home: UIViewController {
         hideFromDropMenu()
         hideToDropMenu()
         searchRouteView.isHidden = true
-
+        
         
         fromplaceTextField.inputView = UIView()
         ToTextField.inputView = UIView()
@@ -193,75 +435,25 @@ class Home: UIViewController {
         frommarker.icon = UIImage(named: "fromiconpin")
         tomarker.icon = UIImage(named: "finishflag")
         
-        
-
-
-        
-        // The Side Menu settings.
-        // to let the menue take effect.
-        menu.target = self.revealViewController()
-        menu.action = #selector(SWRevealViewController.revealToggle(_:))
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
-        //self.revealViewController()?.rearViewRevealWidth = 160
-        
-        // Take notifications from the side menue when it appears and disappears, so we can enable and disable
-        // the map interaction accordingly. this is important to make the side menu gestures work.
-        NotificationCenter.default.addObserver(self, selector: #selector(self.SideMenuAppear), name:NSNotification.Name(rawValue: "SideMenuAppear"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.SideMenuDisappear), name:NSNotification.Name(rawValue: "SideMenuDisappear"), object: nil)
-
         // set the map style from JSON file located in Styles folder.
         setMapStyle(mapview: Gmap,style: "LightMapStyle")
-        
-        
-        // results view swipe configs
-        let downswipe = UISwipeGestureRecognizer(target: self, action: #selector(handleswipe(sender:)))
-        downswipe.direction = .down
-        let upswipe = UISwipeGestureRecognizer(target: self, action: #selector(handleswipe(sender:)))
-        upswipe.direction = .up
-        resultsView.addGestureRecognizer(downswipe)
-        resultsView.addGestureRecognizer(upswipe)
-        resultsView.isHidden = true
-        
-        
-        
+
         determineMyCurrentLocation()
 
     }
     
-    // app view lifecycle => viewwillappear.
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // initialise Clllocation manager with it's delegate extension.
-    }
-    
-    // handle results view swipes
-    @objc func handleswipe (sender : UISwipeGestureRecognizer) {
-        if sender.state == .ended{
-            switch sender.direction{
-            case .down:
-                print("it's down")
-            case .up:
-                print("it's up")
-            default:
-                break
-            }
+    func getcurrentplace() {
+        if searchedfield == "from"{
+            if locationManager.location != nil {
+                Gmap.camera = GMSCameraPosition.camera(withTarget: (locationManager?.location?.coordinate)!, zoom: 16.0)}
+            frommarker.map = Gmap
         }
-    }
-    
-   func getcurrentplace() {
-    if searchedfield == "from"{
-        if locationManager.location != nil {
-            Gmap.camera = GMSCameraPosition.camera(withTarget: (locationManager?.location?.coordinate)!, zoom: 16.0)}
-        frommarker.map = Gmap
-    }
-    if searchedfield == "to"{
-        if locationManager.location != nil {
-            Gmap.camera = GMSCameraPosition.camera(withTarget: (locationManager?.location?.coordinate)!, zoom: 16.0)}
-        tomarker.map = Gmap
-    }
-    
+        if searchedfield == "to"{
+            if locationManager.location != nil {
+                Gmap.camera = GMSCameraPosition.camera(withTarget: (locationManager?.location?.coordinate)!, zoom: 16.0)}
+            tomarker.map = Gmap
+        }
+        
     }
     
     func getplace(){
@@ -279,10 +471,10 @@ class Home: UIViewController {
         autocompleteController.autocompleteBounds = bounds
         
         present(autocompleteController, animated: true, completion: nil)
-
+        
         
     }
-
+    
     
     func hideFromDropMenu() {
         // 1- hide dropmenue view and disable it
@@ -311,54 +503,37 @@ class Home: UIViewController {
         // 2- set the hight of the from parent view to 49
         ToParentViewHeight.constant = 152
     }
-    
-    
-   // see above when the function is called
-   @objc func SideMenuAppear() {
-    Gmap.isUserInteractionEnabled = false
-    }
-    
     // see above when the function is called
-    @objc func SideMenuDisappear() {
-    Gmap.isUserInteractionEnabled = true
-    }
-
-    
-     // see above when the function is called
     func determineMyCurrentLocation() {
         // initialise Clllocation manager with it's delegate extension.
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
-    
-}
-
-
-
-// set mab style
-func setMapStyle(mapview:GMSMapView!,style:String){
-    do {
-        // Set the map style by passing the URL of the local file.
-        if let styleURL = Bundle.main.url(forResource: style, withExtension: "json") {
-            mapview.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-        } else {
-            print("Unable to find style.json")
+    // set mab style
+    func setMapStyle(mapview:GMSMapView!,style:String){
+        do {
+            // Set the map style by passing the URL of the local file.
+            if let styleURL = Bundle.main.url(forResource: style, withExtension: "json") {
+                mapview.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                print("Unable to find style.json")
+            }
+        } catch {
+            print("One or more of the map styles failed to load. \(error)")
         }
-    } catch {
-        print("One or more of the map styles failed to load. \(error)")
     }
-}
 
+}
 
 
 // Location manager delegate extension starts to listen after determineMyCurrentLocation().
-extension Home:CLLocationManagerDelegate {
+extension LineSetUp:CLLocationManagerDelegate {
     
     // Listen to location change.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0] as CLLocation
-
+        
         // Call stopUpdatingLocation() to stop listening for location updates,
         // other wise this function will be called every time when user location changes.
         // manager.stopUpdatingLocation()
@@ -367,13 +542,15 @@ extension Home:CLLocationManagerDelegate {
         if !ismaploaded {
             let camera = GMSCameraPosition.camera(withLatitude: (userLocation.coordinate.latitude), longitude: (userLocation.coordinate.longitude), zoom: 16.0)
             Gmap.camera = camera }
+       // to get device speed if negative object is not moving
+        //print(manager.location?.speed)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
         print("Error \(error)")
         
-       defaultmap()
+        defaultmap()
     }
     
     // Listen for the ALLOW Location Access, and acts accordingly.
@@ -414,21 +591,22 @@ extension Home:CLLocationManagerDelegate {
             if let address = response?.firstResult() {
                 //  print(address)
                 let lines = address.lines! as [String]
-                 currentAddress = lines.joined(separator: " ")
+                currentAddress = lines.joined(separator: " ")
                 //print(currentAddress)
                 textfield.text = currentAddress
-    }
+            }
         }
-
+        
     }
     
 }
-// end of the Location Manager Delegatem extension.
+// end of the Location Manager Delegate extension.
+
 
 // begin of EdittextDelegate
 
-extension Home:UITextFieldDelegate {
-
+extension LineSetUp:UITextFieldDelegate {
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == fromplaceTextField{
             showFromDropMenu()
@@ -437,7 +615,7 @@ extension Home:UITextFieldDelegate {
             }
             frommarker.position = Gmap.camera.target
             frommarker.map = Gmap
-             isfromplaceactive = true
+            isfromplaceactive = true
             searchedfield = "from"
             getaddress(location: Gmap.camera.target, textfield: fromplaceTextField)
             FromXbutoonOutlet.isHidden = false
@@ -468,7 +646,7 @@ extension Home:UITextFieldDelegate {
             }
             isfromexist = true
             Gmap.camera = GMSCameraPosition.camera(withLatitude: Cposition.latitude - 0.0004, longitude: Cposition.longitude + 0.000422, zoom: 16.0)
-
+            
         }
         if textField == ToTextField{
             hideToDropMenu()
@@ -500,19 +678,19 @@ extension Home:UITextFieldDelegate {
         return true;
     }
     
-   
-
-
-
+    
+    
+    
+    
 }
 // end of EdittextDelegate
 
 // begin of google places Delegate
 
-extension Home:GMSAutocompleteViewControllerDelegate {
+extension LineSetUp:GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         // hoon m3naha 25tar place o rj3lna place // place.coordinate // place.name // place.formattedAddress
-       // print(place.coordinate)
+        // print(place.coordinate)
         Gmap.camera = GMSCameraPosition.camera(withTarget: place.coordinate, zoom: 16.0)
         dismiss(animated: true, completion: nil)
         if searchedfield == "from"{
@@ -524,12 +702,12 @@ extension Home:GMSAutocompleteViewControllerDelegate {
             ToTextField.becomeFirstResponder()
         }
         
-
+        
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
         print("Error: ", error.localizedDescription)
-
+        
     }
     
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
@@ -550,19 +728,20 @@ extension Home:GMSAutocompleteViewControllerDelegate {
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
-
+    
 }
 
-extension Home:GMSMapViewDelegate{
+extension LineSetUp:GMSMapViewDelegate{
     
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-        if isfromplaceactive { frommarker.position = position.target } 
+        if isfromplaceactive { frommarker.position = position.target }
         if istoplaceactive {tomarker.position = position.target}
     }
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         
         if isfromplaceactive {getaddress(location: position.target, textfield: fromplaceTextField)}
         if istoplaceactive {getaddress(location: position.target, textfield: ToTextField)}
-
+        
     }
 }
+

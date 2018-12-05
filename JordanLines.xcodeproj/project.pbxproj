@@ -10,11 +10,12 @@
 		19FE0B068B7C23D54838EFA7 /* Pods_JordanLines.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90B941F9EF25EFDB89596AE0 /* Pods_JordanLines.framework */; };
 		331A41F7362BFE1FFD67E697 /* Pods_JordanLinesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FA84F5E64998A911F6645D /* Pods_JordanLinesTests.framework */; };
 		49B0E9407368B86D1C3739D0 /* Pods_JordanLinesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5763B16C254B16F54F8158 /* Pods_JordanLinesUITests.framework */; };
+		7C51755721AEC16700B0AA1A /* LineSetUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51755621AEC16700B0AA1A /* LineSetUp.swift */; };
 		7C59C8C121AAFADC00D3AD29 /* DarkMapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C59C8C021AAFADC00D3AD29 /* DarkMapStyle.json */; };
 		7C59C8C321AB009E00D3AD29 /* LightMapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C59C8C221AB009E00D3AD29 /* LightMapStyle.json */; };
+		7C6A5DA421B7B0A100943412 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C6A5DA321B7B0A100943412 /* GoogleService-Info.plist */; };
 		7C6EF9B621AB223300AB6791 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EF9B421AB223200AB6791 /* SWRevealViewController.m */; };
 		7C6EF9BC21AB34F900AB6791 /* SideMenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6EF9BB21AB34F900AB6791 /* SideMenue.swift */; };
-		7CACDAD521A89E2D0059991D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CACDAD421A89E2D0059991D /* GoogleService-Info.plist */; };
 		7CACDAD721A8AEE50059991D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CACDAD621A8AEE50059991D /* Home.swift */; };
 		7CB228AF21A6B91900C0D925 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB228AE21A6B91900C0D925 /* AppDelegate.swift */; };
 		7CB228B421A6B91900C0D925 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB228B221A6B91900C0D925 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 		7CB228B921A6B91A00C0D925 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB228B721A6B91A00C0D925 /* LaunchScreen.storyboard */; };
 		7CB228C421A6B91A00C0D925 /* JordanLinesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB228C321A6B91A00C0D925 /* JordanLinesTests.swift */; };
 		7CB228CF21A6B91A00C0D925 /* JordanLinesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB228CE21A6B91A00C0D925 /* JordanLinesUITests.swift */; };
+		7CC20D8521AD9B2C00D4652A /* results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC20D8421AD9B2C00D4652A /* results.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,13 +48,14 @@
 		57B9755408AF074487D8FAC8 /* Pods-JordanLinesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JordanLinesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JordanLinesTests/Pods-JordanLinesTests.release.xcconfig"; sourceTree = "<group>"; };
 		712D2DB278332574B84E3613 /* Pods-JordanLines.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JordanLines.release.xcconfig"; path = "Pods/Target Support Files/Pods-JordanLines/Pods-JordanLines.release.xcconfig"; sourceTree = "<group>"; };
 		7C13DBC89D66E8B881ECA2E5 /* Pods-JordanLines.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JordanLines.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JordanLines/Pods-JordanLines.debug.xcconfig"; sourceTree = "<group>"; };
+		7C51755621AEC16700B0AA1A /* LineSetUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSetUp.swift; sourceTree = "<group>"; };
 		7C59C8C021AAFADC00D3AD29 /* DarkMapStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DarkMapStyle.json; sourceTree = "<group>"; };
 		7C59C8C221AB009E00D3AD29 /* LightMapStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LightMapStyle.json; sourceTree = "<group>"; };
+		7C6A5DA321B7B0A100943412 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C6EF9B321AB222E00AB6791 /* JordanLines-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JordanLines-Bridging-Header.h"; sourceTree = "<group>"; };
 		7C6EF9B421AB223200AB6791 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		7C6EF9B521AB223300AB6791 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		7C6EF9BB21AB34F900AB6791 /* SideMenue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenue.swift; sourceTree = "<group>"; };
-		7CACDAD421A89E2D0059991D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7CACDAD621A8AEE50059991D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		7CB228AB21A6B91900C0D925 /* JordanLines.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JordanLines.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CB228AE21A6B91900C0D925 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +69,7 @@
 		7CB228CA21A6B91A00C0D925 /* JordanLinesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JordanLinesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CB228CE21A6B91A00C0D925 /* JordanLinesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JordanLinesUITests.swift; sourceTree = "<group>"; };
 		7CB228D021A6B91A00C0D925 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7CC20D8421AD9B2C00D4652A /* results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = results.swift; sourceTree = "<group>"; };
 		88FA84F5E64998A911F6645D /* Pods_JordanLinesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JordanLinesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90B941F9EF25EFDB89596AE0 /* Pods_JordanLines.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JordanLines.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D5763B16C254B16F54F8158 /* Pods_JordanLinesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JordanLinesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,12 +163,14 @@
 				7C59C8BF21AAFAAE00D3AD29 /* Styles */,
 				7CB228AE21A6B91900C0D925 /* AppDelegate.swift */,
 				7CB228B221A6B91900C0D925 /* Main.storyboard */,
+				7C51755621AEC16700B0AA1A /* LineSetUp.swift */,
 				7CACDAD621A8AEE50059991D /* Home.swift */,
+				7CC20D8421AD9B2C00D4652A /* results.swift */,
 				7CB228B521A6B91A00C0D925 /* Assets.xcassets */,
 				7CB228B721A6B91A00C0D925 /* LaunchScreen.storyboard */,
 				7CB228BA21A6B91A00C0D925 /* Info.plist */,
-				7CACDAD421A89E2D0059991D /* GoogleService-Info.plist */,
 				7C6EF9BB21AB34F900AB6791 /* SideMenue.swift */,
+				7C6A5DA321B7B0A100943412 /* GoogleService-Info.plist */,
 			);
 			path = JordanLines;
 			sourceTree = "<group>";
@@ -313,9 +319,9 @@
 				7CB228B921A6B91A00C0D925 /* LaunchScreen.storyboard in Resources */,
 				7C59C8C321AB009E00D3AD29 /* LightMapStyle.json in Resources */,
 				7C59C8C121AAFADC00D3AD29 /* DarkMapStyle.json in Resources */,
-				7CACDAD521A89E2D0059991D /* GoogleService-Info.plist in Resources */,
 				7CB228B621A6B91A00C0D925 /* Assets.xcassets in Resources */,
 				7CB228B421A6B91900C0D925 /* Main.storyboard in Resources */,
+				7C6A5DA421B7B0A100943412 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,8 +485,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CC20D8521AD9B2C00D4652A /* results.swift in Sources */,
 				7CACDAD721A8AEE50059991D /* Home.swift in Sources */,
 				7C6EF9BC21AB34F900AB6791 /* SideMenue.swift in Sources */,
+				7C51755721AEC16700B0AA1A /* LineSetUp.swift in Sources */,
 				7CB228AF21A6B91900C0D925 /* AppDelegate.swift in Sources */,
 				7C6EF9B621AB223300AB6791 /* SWRevealViewController.m in Sources */,
 			);
@@ -667,7 +675,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cyborgs.com.JordanLines;
+				PRODUCT_BUNDLE_IDENTIFIER = JordanLinesios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SideMenu/JordanLines-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -690,7 +698,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cyborgs.com.JordanLines;
+				PRODUCT_BUNDLE_IDENTIFIER = JordanLinesios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SideMenu/JordanLines-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
