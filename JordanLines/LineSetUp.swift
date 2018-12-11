@@ -40,7 +40,10 @@ class LineSetUp: UIViewController {
         var lat = CLLocationDegrees()
         var long = CLLocationDegrees()
             }
+    var stotest = [Dictionary<String,String>]()
+    
     var stops = Array<stop>()
+    var stopsd = [Dictionary<String,String>]()
     
     
     
@@ -179,57 +182,13 @@ class LineSetUp: UIViewController {
             issearched = false
             var koko = ["stop2": "33.66,35.00" , "stop1":"33.66,34.99"]
             
-            db.collection("Lines").document(linename.text!).setData([
-                "bus type": bustype.text,
-                "from": String(fromlocationCoordinates.latitude) + "," + String(fromlocationCoordinates.longitude) ,
-                "to": String(tolocationCoordinates.latitude) + "," + String(tolocationCoordinates.longitude),
-                "route description": routeDescription.text
-            ]) { err in
-                if let err = err {
-                    print("Error writing document: \(err)")
-                } else {
-                    print("Document successfully written!")
-                }
-            }
-
-            var alpha = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-            var c1 = 0
-            var c2 = 1
-            for stop in stops {
-                var pref = alpha[c1] + String(c2)
-                print(stop.lat)
-                db.collection("Stopspool").document(stop.name).setData([
-                    "name": stop.name,
-                    "lat": stop.lat,
-                    "lon": stop.long
-                ]) { err in
-                    if let err = err {
-                        print("Error writing document: \(err)")
-                    } else {
-                        print("Document successfully written!")
-                    }
-                }
-                
-                db.collection("Lines").document(linename.text!).collection("Stops").document(pref + stop.name).setData([
-                    "ref": "/Stopspool/"+stop.name,
-                ]) { err in
-                    if let err = err {
-                        print("Error writing document: \(err)")
-                    } else {
-                        print("Document successfully written!")
-                    }
-                }
-
-                
-                
-                
-                if c2 < 9 {
-                    c2 = c2 + 1
-                } else {
-                    c1 = c1 + 1
-                    c2 = 1
-                }
-            }
+            var data = [Dictionary<String,Any>]()
+            data.append(["name":linename.text!,"stops":stopsd])
+            
+            
+            print(JSON(data))
+            
+            
             
             
         } else {
@@ -238,20 +197,21 @@ class LineSetUp: UIViewController {
         Gmap.camera = GMSCameraPosition.camera(withLatitude:fromlocationCoordinates.latitude , longitude:fromlocationCoordinates.longitude , zoom: 16)
         
         let parameters = [
-            "from": String(fromlocationCoordinates.latitude) + ", " + String(fromlocationCoordinates.longitude),
-            "to": String(tolocationCoordinates.latitude) + ", " + String(tolocationCoordinates.longitude)
+//            "from": String(fromlocationCoordinates.latitude) + ", " + String(fromlocationCoordinates.longitude),
+//            "to": String(tolocationCoordinates.latitude) + ", " + String(tolocationCoordinates.longitude)
+            "from": "31.98266, 35.83332",
+            "to": "31.97347, 35.83896"
         ]
         
-        Alamofire.request("http://localhost:3000/api/plotstops",parameters:parameters).responseString { response in
+        Alamofire.request("http://jorlines.com:5000/api/plotstops",parameters:parameters).responseString { response in
             let polyline = response.value!
-           // print(polyline)
+            print(polyline)
             let polylineparameters = [
                 "polyline": polyline,]
             Alamofire.request("http://api.khutoutna.gov.jo/decode", parameters: polylineparameters).responseJSON { response in
                 if let json = response.result.value {
                     let polyarr = JSON(json).arrayValue
                     self.handlepolyarr(polyarr: polyarr)
-                    
                 }
             }
             
@@ -299,12 +259,14 @@ class LineSetUp: UIViewController {
                         }
                         
                         print(stopcreatedname)
-                        var mystop = stop()
-                        mystop.name = stopcreatedname
-                        mystop.lat = lat
-                        mystop.long = lon
-                        self.stops.append(mystop)
-                    }
+//                        var mystop = stop()
+//                        mystop.name = stopcreatedname
+//                        mystop.lat = lat
+//                        mystop.long = lon
+//                        self.stops.append(mystop)
+                        if stopcreatedname != ""{
+                        self.stopsd.append(["name":stopcreatedname,"latlon":String(lat)+","+String(lon)])
+                        }}
                 }
                 
             } else {
@@ -324,10 +286,13 @@ class LineSetUp: UIViewController {
                                 }
                                 print(stopcreatedname)
                                 var mystop = stop()
-                                mystop.name = stopcreatedname
-                                mystop.lat = lat
-                                mystop.long = lon
-                                self.stops.append(mystop)
+//                                mystop.name = stopcreatedname
+//                                mystop.lat = lat
+//                                mystop.long = lon
+//                                self.stops.append(mystop)
+                                if stopcreatedname != ""{
+                                    self.stopsd.append(["name":stopcreatedname,"latlon":String(lat)+","+String(lon)])
+                                }
 
                             }
                         }
@@ -348,7 +313,10 @@ class LineSetUp: UIViewController {
     func handlepolyarr(polyarr : [JSON]){
      polyarrs = polyarr
      counter = polyarr.count
-        stops = Array<stop>()
+     var stopsd = [Dictionary<String,String>]()
+
+        //stops = Array<stop>()
+        
         runTimer()
         
         
@@ -398,12 +366,38 @@ class LineSetUp: UIViewController {
         super.viewDidLoad()
         
         
+        
+        
+//        let myGroup = DispatchGroup()
+//        var are = [""]
+//
+//        for i in 0 ..< 5 {
+//            myGroup.enter()
+//
+//            Alamofire.request("https://httpbin.org/get", parameters: ["foo": "bar"]).responseJSON { response in
+//                print("Finished request \(i)")
+//                are.append("\(i)")
+//
+//
+//                myGroup.leave()
+//            }
+//        }
+//
+//        myGroup.notify(queue: .main) {
+//            print("Finished all requests.")
+//            print(are)
+//        }
+        
+        
+        
         // [START setup]
         let settings = FirestoreSettings()
         
         Firestore.firestore().settings = settings
         // [END setup]
         db = Firestore.firestore()
+        
+        
 
 
         // Do any additional setup after loading the view.

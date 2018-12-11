@@ -222,7 +222,7 @@ class Home: UIViewController {
         upswipe.direction = .up
         resultsView.addGestureRecognizer(downswipe)
         resultsView.addGestureRecognizer(upswipe)
-        resultsView.isHidden = true
+        resultsView.isHidden = false
         
         
         

@@ -16,7 +16,8 @@ pod 'Alamofire'
 pod 'SwiftyJSON'
 pod 'IQKeyboardManagerSwift'
 pod 'SwiftLint'
-
+pod "PromiseKit"
+pod "AsyncSwift"
 
 
 
