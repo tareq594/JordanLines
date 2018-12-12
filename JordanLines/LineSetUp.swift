@@ -167,6 +167,7 @@ class LineSetUp: UIViewController {
     @IBOutlet weak var bustype: UITextField!
     @IBOutlet weak var routeDescription: UITextField!
     
+    @IBOutlet weak var segmentdirection: UITextField!
     
     
     // search route button elsements
@@ -183,10 +184,10 @@ class LineSetUp: UIViewController {
             var koko = ["stop2": "33.66,35.00" , "stop1":"33.66,34.99"]
             
             var data = [Dictionary<String,Any>]()
-            data.append(["name":linename.text!,"stops":stopsd])
+            data.append(["name":routeDescription.text!,"direction":segmentdirection.text!,"stops":stopsd])
             
             
-            print(JSON(data))
+            print(JSON(data)[0])
             
             
             
@@ -194,13 +195,13 @@ class LineSetUp: UIViewController {
         } else {
             issearched = true
             SearchButtonOutlet.setTitle("Confirm", for: .normal)
-        Gmap.camera = GMSCameraPosition.camera(withLatitude:fromlocationCoordinates.latitude , longitude:fromlocationCoordinates.longitude , zoom: 16)
+        Gmap.camera = GMSCameraPosition.camera(withLatitude:fromlocationCoordinates.latitude , longitude:fromlocationCoordinates.longitude , zoom: 12.0)
         
         let parameters = [
 //            "from": String(fromlocationCoordinates.latitude) + ", " + String(fromlocationCoordinates.longitude),
 //            "to": String(tolocationCoordinates.latitude) + ", " + String(tolocationCoordinates.longitude)
-            "from": "31.98266, 35.83332",
-            "to": "31.97347, 35.83896"
+            "from": linename.text,
+            "to": bustype.text
         ]
         
         Alamofire.request("http://jorlines.com:5000/api/plotstops",parameters:parameters).responseString { response in
@@ -225,7 +226,7 @@ class LineSetUp: UIViewController {
     var counter = 5
 
     func runTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 2.0, target: self,   selector: (#selector(LineSetUp.updateTimer)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self,   selector: (#selector(LineSetUp.updateTimer)), userInfo: nil, repeats: true)
     }
     
     @objc func updateTimer(){
@@ -233,14 +234,14 @@ class LineSetUp: UIViewController {
             timer.invalidate()
         } else {
     
-        var bounds = GMSCoordinateBounds()
+        //var bounds = GMSCoordinateBounds()
                         let lat = polyarrs[polyarrs.count-counter]["lat"].doubleValue
                         let lon = polyarrs[polyarrs.count-counter]["lon"].doubleValue
                         let pointmarker = GMSMarker()
                         pointmarker.map = self.Gmap
                         pointmarker.position.latitude = lat
                         pointmarker.position.longitude = lon
-                        bounds = bounds.includingCoordinate(pointmarker.position)
+                        //bounds = bounds.includingCoordinate(pointmarker.position)
             
             if counter == 1 {
                 let polyparameters = [
@@ -254,11 +255,15 @@ class LineSetUp: UIViewController {
                     
                     if let json = response.result.value {
                         var stopcreatedname = JSON(json)["plan"]["itineraries"][0]["legs"][0]["from"]["name"].stringValue
+                        var stopid = JSON(json)["plan"]["itineraries"][0]["legs"][0]["from"]["stopIndex"].stringValue
                         if stopcreatedname == "Origin"{
                             stopcreatedname = JSON(json)["plan"]["itineraries"][0]["legs"][1]["from"]["name"].stringValue
+                             stopid = JSON(json)["plan"]["itineraries"][0]["legs"][1]["from"]["stopIndex"].stringValue
+
                         }
-                        
+                        stopcreatedname = stopcreatedname + "-" + stopid
                         print(stopcreatedname)
+                        pointmarker.title = stopcreatedname
 //                        var mystop = stop()
 //                        mystop.name = stopcreatedname
 //                        mystop.lat = lat
@@ -281,10 +286,17 @@ class LineSetUp: UIViewController {
             
                             if let json = response.result.value {
                                 var stopcreatedname = JSON(json)["plan"]["itineraries"][0]["legs"][0]["from"]["name"].stringValue
+                                var stopid = JSON(json)["plan"]["itineraries"][0]["legs"][0]["from"]["stopIndex"].stringValue
+
                                 if stopcreatedname == "Origin"{
                                     stopcreatedname = JSON(json)["plan"]["itineraries"][0]["legs"][1]["from"]["name"].stringValue
+                                     stopid = JSON(json)["plan"]["itineraries"][0]["legs"][1]["from"]["stopIndex"].stringValue
+                                    
+
                                 }
+                                stopcreatedname = stopcreatedname + "-" + stopid
                                 print(stopcreatedname)
+                                pointmarker.title = stopcreatedname
                                 var mystop = stop()
 //                                mystop.name = stopcreatedname
 //                                mystop.lat = lat
@@ -301,8 +313,8 @@ class LineSetUp: UIViewController {
             
             
             
-                    let update = GMSCameraUpdate.fit(bounds, withPadding: 60)
-                    Gmap.animate(with: update)
+                   // let update = GMSCameraUpdate.fit(bounds, withPadding: 60)
+                   // Gmap.animate(with: update)
                     }
             counter = counter - 1
         }
@@ -417,7 +429,7 @@ class LineSetUp: UIViewController {
         // by default the dropdown menues are hidden.
         hideFromDropMenu()
         hideToDropMenu()
-        searchRouteView.isHidden = true
+        searchRouteView.isHidden = false
         
         
         fromplaceTextField.inputView = UIView()
@@ -439,12 +451,12 @@ class LineSetUp: UIViewController {
     func getcurrentplace() {
         if searchedfield == "from"{
             if locationManager.location != nil {
-                Gmap.camera = GMSCameraPosition.camera(withTarget: (locationManager?.location?.coordinate)!, zoom: 16.0)}
+                Gmap.camera = GMSCameraPosition.camera(withTarget: (locationManager?.location?.coordinate)!, zoom: 12.0)}
             frommarker.map = Gmap
         }
         if searchedfield == "to"{
             if locationManager.location != nil {
-                Gmap.camera = GMSCameraPosition.camera(withTarget: (locationManager?.location?.coordinate)!, zoom: 16.0)}
+                Gmap.camera = GMSCameraPosition.camera(withTarget: (locationManager?.location?.coordinate)!, zoom: 12.0)}
             tomarker.map = Gmap
         }
         
@@ -534,7 +546,7 @@ extension LineSetUp:CLLocationManagerDelegate {
         
         // this is needed to load the map camera once the location is provided.
         if !ismaploaded {
-            let camera = GMSCameraPosition.camera(withLatitude: (userLocation.coordinate.latitude), longitude: (userLocation.coordinate.longitude), zoom: 16.0)
+            let camera = GMSCameraPosition.camera(withLatitude: (userLocation.coordinate.latitude), longitude: (userLocation.coordinate.longitude), zoom: 12.0)
             Gmap.camera = camera }
        // to get device speed if negative object is not moving
         //print(manager.location?.speed)
@@ -574,7 +586,7 @@ extension LineSetUp:CLLocationManagerDelegate {
     
     // this function set default map camera when location failed to be obtained
     func defaultmap(){
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 16.0)
+        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 12.0)
         Gmap.camera = camera
     }
     
@@ -605,7 +617,7 @@ extension LineSetUp:UITextFieldDelegate {
         if textField == fromplaceTextField{
             showFromDropMenu()
             if isfromexist {
-                Gmap.camera = GMSCameraPosition.camera(withTarget:fromlocationCoordinates, zoom: 16.0)
+                Gmap.camera = GMSCameraPosition.camera(withTarget:fromlocationCoordinates, zoom: 12.0)
             }
             frommarker.position = Gmap.camera.target
             frommarker.map = Gmap
@@ -617,7 +629,7 @@ extension LineSetUp:UITextFieldDelegate {
         if textField == ToTextField {
             showToDropMenu()
             if istoexist {
-                Gmap.camera = GMSCameraPosition.camera(withTarget:tolocationCoordinates, zoom: 16.0)
+                Gmap.camera = GMSCameraPosition.camera(withTarget:tolocationCoordinates, zoom: 12.0)
             }
             
             tomarker.position = Gmap.camera.target
@@ -639,7 +651,7 @@ extension LineSetUp:UITextFieldDelegate {
                 searchRouteView.isHidden = false
             }
             isfromexist = true
-            Gmap.camera = GMSCameraPosition.camera(withLatitude: Cposition.latitude - 0.0004, longitude: Cposition.longitude + 0.000422, zoom: 16.0)
+            Gmap.camera = GMSCameraPosition.camera(withLatitude: Cposition.latitude - 0.0004, longitude: Cposition.longitude + 0.000422, zoom: 12.0)
             
         }
         if textField == ToTextField{
@@ -651,7 +663,7 @@ extension LineSetUp:UITextFieldDelegate {
                 searchRouteView.isHidden = false
             }
             istoexist = true
-            Gmap.camera = GMSCameraPosition.camera(withLatitude: Cposition.latitude - 0.0004, longitude: Cposition.longitude + 0.000422, zoom: 16.0)
+            Gmap.camera = GMSCameraPosition.camera(withLatitude: Cposition.latitude - 0.0004, longitude: Cposition.longitude + 0.000422, zoom: 12.0)
         }
     }
     
@@ -685,7 +697,7 @@ extension LineSetUp:GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         // hoon m3naha 25tar place o rj3lna place // place.coordinate // place.name // place.formattedAddress
         // print(place.coordinate)
-        Gmap.camera = GMSCameraPosition.camera(withTarget: place.coordinate, zoom: 16.0)
+        Gmap.camera = GMSCameraPosition.camera(withTarget: place.coordinate, zoom: 12.0)
         dismiss(animated: true, completion: nil)
         if searchedfield == "from"{
             isfromexist = false

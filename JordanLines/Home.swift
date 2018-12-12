@@ -148,6 +148,7 @@ class Home: UIViewController {
     @IBOutlet weak var SearchButtonOutlet: UIButton!
     @IBAction func SearchRouteButton(_ sender: Any) {
         results.getroutes(from: fromlocationCoordinates,to: tolocationCoordinates)
+        resultsView.isHidden = false
     }
     
     // results View
@@ -222,7 +223,7 @@ class Home: UIViewController {
         upswipe.direction = .up
         resultsView.addGestureRecognizer(downswipe)
         resultsView.addGestureRecognizer(upswipe)
-        resultsView.isHidden = false
+        resultsView.isHidden = true
         
         
         
